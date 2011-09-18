@@ -1,1 +1,49 @@
+Task:
+
+Create a very simple, web based, to-do application. This would be
+something that could substitute using a sticky and pen. The time limit is
+four hours.
+
+Required Stories:
+- As a user, I should be able to create an account with just my email
+address (no password required)
+- As a user, I should be able to add a todo that includes title
+(required), description (optional) and due date (optional)
+- As a user, I should be able to reorder todos easily
+- As a user, I can checkoff todos
+- As a user, I can login using just my email address
+- As a user, I don¹t have to login unless I¹ve cleared my cache
+
+Nice to have stories (in order):
+- As a user, I can add and manage todos 100% through AJAX
+- As a user, I get reminded by email when a todo is past due
+- As a user, I can create nested todos
+
+Based on:
 Example rails application used in Railscasts.
+Example backone.js application ToDos.
+
+___________________________________________________________________-
+
+
+When reading the code, please keep the following in mind:
+
+There are some naming conventions 
+established by the projects on which this application is based
+that remain to be refactored so that the application code make sense. 
+
+For example, 
+the projects model should be renamed to todo.
+
+KNOWN BUGS:
+
+The projects controller action 'create' is returning a 500 error when it is being called
+by backbone´s sync method because of extra parameters that rails includes, which are causing
+an unknown attribute error. The problem is very similar to the one described here
+http://stackoverflow.com/questions/7137096/error-when-saving-a-backbone-js-model-with-rails
+
+The above issue is a block on the following issues:
+
+The todos created are not currently tied to any particular logged in user.
+
+
