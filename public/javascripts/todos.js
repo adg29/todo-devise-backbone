@@ -61,7 +61,7 @@ $(function(){
     // GUID in the database. This generates the next order number for new items.
     nextOrder: function() {
       if (!this.length) return 1;
-      return this.last().get('order') + 1;
+      return this.size() + 1;
     },
 
     // Todos are sorted by their original insertion order.
@@ -113,7 +113,6 @@ $(function(){
       var tid = this.model.get('id');
       var text = this.model.get('name');
       var order = this.model.get('order');
-      console.log( $(this.el).attr('data-tid',tid) );
       this.$('.todo-text').text(text);
       this.$('#todo-order').text(order);
       this.input = this.$('.todo-input');
@@ -205,7 +204,6 @@ $(function(){
 
 
     updateOrder: function(i,todo){
-	console.log( todo );
 	var id = $(todo).attr('data-tid')
         var todo_m = Todos.get(id);
 	todo_m.save({order: i+1});
@@ -257,3 +255,4 @@ $(function(){
   window.App = new AppView;
 
 });
+
