@@ -12,7 +12,6 @@ _.templateSettings = {
 
 // Load the application once the DOM is ready, using `jQuery.ready`:
 $(function(){
-
   // Todo Model
   // ----------
 
@@ -111,8 +110,12 @@ $(function(){
     // To avoid XSS (not that it would be harmful in this particular app),
     // we use `jQuery.text` to set the contents of the todo item.
     setText: function() {
+      var tid = this.model.get('id');
       var text = this.model.get('name');
+      var order = this.model.get('order');
+      console.log( $(this.el).attr('data-tid',tid) );
       this.$('.todo-text').text(text);
+      this.$('#todo-order').text(order);
       this.input = this.$('.todo-input');
       this.input.bind('blur', _.bind(this.close, this)).val(text);
     },
@@ -175,6 +178,12 @@ $(function(){
     // collection, when items are added or changed. Kick things off by
     // loading any preexisting todos that might be saved in *localStorage*.
     initialize: function() {
+      var that = this;
+      this.$('#todo-list').sortable({
+        update: function(){
+	  $('#todo-list li').each( that.updateOrder );
+	}
+      });
       this.input    = this.$("#new-todo");
 
       Todos.bind('add',   this.addOne, this);
@@ -194,11 +203,20 @@ $(function(){
       }));
     },
 
+
+    updateOrder: function(i,todo){
+	console.log( todo );
+	var id = $(todo).attr('data-tid')
+        var todo_m = Todos.get(id);
+	todo_m.save({order: i+1});
+    },
+
     // Add a single todo item to the list by creating a view for it, and
     // appending its element to the `<ul>`.
     addOne: function(todo) {
       var view = new TodoView({model: todo});
       this.$("#todo-list").append(view.render().el);
+      $('#todo-list').sortable('refresh');
     },
 
     // Add all items in the **Todos** collection at once.

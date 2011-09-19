@@ -4,7 +4,7 @@ Todo::Application.routes.draw do |map|
   match "/projects/backbone" => "projects#backbone"
 
   resources :projects, :tasks
-  root :to => "projects#index"
+  root :to => "projects#backbone"
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

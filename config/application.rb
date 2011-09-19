@@ -37,7 +37,7 @@ module Todo
     #   g.test_framework  :test_unit, :fixture => true
     # end
 
-	config.action_view.javascript_expansions[:defaults] = %w(jquery rails)
+	config.action_view.javascript_expansions[:defaults] = %w(jquery jquery-ui rails)
 
     # Configure sensitive parameters which will be filtered from the log file.
 

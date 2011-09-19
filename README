@@ -39,14 +39,18 @@ that remain to be refactored so that the application code make sense.
 For example, 
 the projects model should be renamed to todo.
 
+
 KNOWN BUGS:
+
+Creaion of a new todo uses an already taken order number
+
+FIXED BUGS:
 
 The projects controller action 'create' is returning a 500 error when it is being called
 by backbone´s sync method because of extra parameters that rails includes, which are causing
 an unknown attribute error. The problem is very similar to the one described here
 http://stackoverflow.com/questions/7137096/error-when-saving-a-backbone-js-model-with-rails
 
-The above issue is a block on the following issues:
 
 The todos created are not currently tied to any particular logged in user.
 
