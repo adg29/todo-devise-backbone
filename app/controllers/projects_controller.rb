@@ -35,9 +35,14 @@ class ProjectsController < ApplicationController
   end
   
   def create
+    # delete the action and controller params 
+    # passed in by rails
+    # TODO look for a smarter work around.
+    # e.g. use rails form helpers and a namespaced 
+    # entity of the params object
     proj_params = params
-	proj_params.delete('action')
-	proj_params.delete('controller')
+    proj_params.delete('action')
+    proj_params.delete('controller')
     @project = Project.new(proj_params)
 	logger.debug(params)
 	respond_to do |format|
@@ -58,7 +63,14 @@ class ProjectsController < ApplicationController
   def update
     @project = Project.find(params[:id])
 	respond_to do |format|
-		if @project.update_attributes(params)
+		proj_params = params
+		# there has to be a better way of
+		# receiving the params than having o
+		# delete the action and controller params 
+		# passed in by rails
+		proj_params.delete('action')
+		proj_params.delete('controller')
+		if @project.update_attributes(proj_params)
 		  format.html { redirect_to(@project, :notice => 'Project was successfully updated.') }
 		  format.json  { head :ok }
 		else
