@@ -1,4 +1,4 @@
-Task:
+TASK:
 
 Create a very simple, web based, to-do application. This would be
 something that could substitute using a sticky and pen. The time limit is
@@ -19,14 +19,18 @@ Nice to have stories (in order):
 - As a user, I get reminded by email when a todo is past due
 - As a user, I can create nested todos
 
-Based on:
+BASED ON:
+
 Example rails application used in Railscasts.
 Example backone.js application ToDos.
 
 ___________________________________________________________________-
 
 
-When reading the code, please keep the following in mind:
+When reading the code and setting up the application, please keep the following in mind:
+
+The config/database.yml file has been placed in gitignore. Please create your own file based on 
+database.yml.sample
 
 There are some naming conventions 
 established by the projects on which this application is based
