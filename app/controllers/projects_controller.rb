@@ -1,19 +1,20 @@
 class ProjectsController < ApplicationController
+  before_filter :authenticate_user!#, :except => [:show, :index]
   def index
-    @projects = Project.find(:all)
+    @projects = Project.find(:all, :conditions => { :user_id => current_user.id} )
     
 	respond_to do |format|
-      format.html # index.html.erb
-      format.json  { render :json => @projects }
-    end
+	  format.html # index.html.erb
+	  format.json  { render :json => @projects }
+	end
   end
 
  def backbone
-    @projects = Project.find(:all)
+    @projects = Project.find(:all, :conditions => { :user_id => current_user.id} )
 	respond_to do |format|
-      format.html # index.html.erb
-      format.json  { render :json => @projects }
-    end	
+      	  format.html # index.html.erb
+      	  format.json  { render :json => @projects }
+    	end	
   end
   
   def show
@@ -43,6 +44,7 @@ class ProjectsController < ApplicationController
     proj_params = params
     proj_params.delete('action')
     proj_params.delete('controller')
+    proj_params['user_id'] = current_user.id
     @project = Project.new(proj_params)
 	logger.debug(params)
 	respond_to do |format|
@@ -70,6 +72,7 @@ class ProjectsController < ApplicationController
 		# passed in by rails
 		proj_params.delete('action')
 		proj_params.delete('controller')
+	        proj_params['user_id'] = current_user.id
 		if @project.update_attributes(proj_params)
 		  format.html { redirect_to(@project, :notice => 'Project was successfully updated.') }
 		  format.json  { head :ok }
